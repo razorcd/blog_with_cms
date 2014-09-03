@@ -17,7 +17,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 
 #captcha
-#gem "galetahub-simple_captcha", :require => "simple_captcha"
+gem 'simple_captcha2', require: 'simple_captcha'
 
 # Use SCSS for stylesheets
 # gem 'sass-rails', '~> 4.0.3'

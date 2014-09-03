@@ -10,7 +10,9 @@ class CreateUserTable < ActiveRecord::Migration
       t.string "mid_name", :limit => 16, :null => false
       t.string "last_name", :limit => 16, :null => false
       t.date "birth", :null => false
+      #t.boolean "greed", :default => false
       t.timestamps
     end
+    add_index :users, :username
   end
 end
