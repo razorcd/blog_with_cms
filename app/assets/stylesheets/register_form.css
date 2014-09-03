@@ -1,0 +1,51 @@
+.register {
+  width: 260px;
+  margin: 35px 25px;
+}
+
+  .register .control-group  {
+    margin-bottom: 20px;
+  }
+
+
+    .register .control-group label {
+      display: block;
+      padding-bottom: 5px;
+    }
+
+    .register .control-group input {
+      height:20px;
+      width: 250px;
+      font-size: 16px;
+    }
+
+
+  .register .error-msg {
+    color:red;
+    margin-bottom: 15px;
+  }
+
+  .register .agreed {
+    text-align: center;
+  }
+
+  .register .register-btn {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+    .register .register-btn button {
+      color:black;
+      font-weight: bold;
+      background: none;
+      border:0;
+
+      -webkit-transition:all .3s ease;
+      -moz-transition:all .3s ease;
+      -o-transition:all .3s ease;
+      transition:all .3s ease
+    }
+
+    .register .register-btn button:hover {
+      color:orange;
+    }

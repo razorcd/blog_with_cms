@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blog</title>
+  <%= stylesheet_link_tag('shared', :media => 'all') %>
+  <%= stylesheet_link_tag('nav', :media => 'all') %>
+  <%= stylesheet_link_tag('public', :media => 'all') %>
+  <%= stylesheet_link_tag('register_form', :media => 'all') %>
+  <%= stylesheet_link_tag('footer', :media => 'all') %>
+  <%# <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %> 
+  <%# <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="main-div">
+    <%= render "shared/nav" %>
+    <%= yield %>
+    <%= render(:partial => "shared/footer") %>
+  </div>
+</body>
+</html>

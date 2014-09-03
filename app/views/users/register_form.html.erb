@@ -1,0 +1,46 @@
+<h1 class="title">USER REGISTRATION</h1>
+<div>
+
+  <%= form_for(:users, :url => {:action => 'create'}, :html => {:class => "register"}) do |f| %>
+    <div class="error-msg"></div>
+    <div class="control-group">
+      <div><%= f.label(:username, "Username:") %></div>
+      <div><%= f.text_field(:username) %></div>
+    </div>
+    <div class="control-group">
+      <div><%= f.label(:password, "Password:") %></div>
+      <div><%= f.text_field(:password) %></div>
+    </div>
+    <div class="control-group">
+      <div><%= f.label(:email, "Email:") %></div>
+      <div><%= f.text_field(:email) %></div>
+    </div>
+    <div class="control-group">
+      <div><%= f.label(:first_name, "First name: ") %></div>
+      <div><%= f.text_field(:first_name) %></div>
+    </div>
+    <div class="control-group">
+      <div><%= f.label(:mid_name, "Middle name:") %></div>
+      <div><%= f.text_field(:mid_name) %></div>
+    </div>
+    <div class="control-group">
+      <div><%= f.label(:last_name, "Last name:") %></div>
+      <div><%= f.text_field(:last_name) %></div>
+    </div>
+    <div class="control-group">
+      <div><%= f.label(:birth, "Birth date:") %></div>
+      <%= date_select :users, :birth , :start_year => 1900, :end_year => Date.today.year-3 , :default => Date.today.beginning_of_year-10.years %>      
+    </div>
+    <%# <%= f.text_field(:capcha) %> 
+    <div class="agreed">
+      <div><%= f.check_box(:agreed) %>
+      <%= f.label(:agreed, "I agree with the terms") %></div>
+    </div>
+    <div clas="capcha">
+    </div>
+    <div class="register-btn">
+      <button type="submit" >> REGISTER</button>
+      <button type="reset" >> RESET</button>
+    </div>
+  <% end %>
+</div>

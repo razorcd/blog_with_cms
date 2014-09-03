@@ -1,0 +1,91 @@
+.nav {
+  position:relative;
+  background-color: orange;
+  font-family: helvetica, arial, sans-serif;
+  padding: 0;
+  margin: 0;
+  display:block;
+  width:100%;
+  overflow: hidden;
+}
+
+  .nav ul {
+    list-style: none;
+    padding:0;
+    margin:0;
+    width:100%;
+  }
+
+    .nav ul li {
+      margin:0;
+      padding:0;
+      float: left;
+      width: 100px;
+    }
+      .nav ul li a {
+        display: block;
+        margin:0;
+        padding:0;
+        padding-top: 40px;
+        text-align: center;
+        background-color: red;
+        height: 60px;
+
+        -webkit-transition:all .3s ease;
+        -moz-transition:all .3s ease;
+        -o-transition:all .3s ease;
+        transition:all .3s ease
+      }
+
+      .nav ul li a,
+      .nav ul li a:focus,
+      .nav ul li a:visited,
+      .nav ul li a:hover,
+      .nav ul li a:active {
+        color: #000;
+        text-decoration: none;
+      }
+
+      .nav ul li a:hover,
+      .nav ul li a:active {
+        background-color: #42E65A;
+      }
+
+
+      /* vertical lines between buttons */
+      .nav ul>li:not(:first-child) a {
+        border-left: 2px solid white;
+      }
+
+
+.login-btn {
+  position:absolute;
+  top:8px;
+  right:-10px;
+  background-color: #CE0005;
+  margin:0;
+  padding: 3px 20px 3px 80px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+
+  -webkit-transition:all .3s ease;
+  -moz-transition:all .3s ease;
+  -o-transition:all .3s ease;
+  transition:all .3s ease;
+
+
+  -ms-transform: rotate(15deg) translate3d( 0, 0, 0); /* IE 9 */
+  -webkit-transform: rotate(15deg) translate3d( 0, 0, 0); /* Chrome, Safari, Opera */
+  transform: rotate(15deg) translate3d( 0, 0, 0);
+}
+
+  .login-btn a{
+    text-decoration: none;
+    text-transform: uppercase;
+    color:white;
+  }
+
+  .login-btn a:hover {
+    color:#47EFF8;
+  };
