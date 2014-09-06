@@ -4,6 +4,7 @@
 
 <% if (@user && @user.email_confirmed == true) %>
   <p class="message">Email was confirmed, you can login.</p>
+  <%= render(:partial => "shared/login_form") %>
 <% else %>
   <p class="message"> Email confirmation invalid.</p>
 <% end %>

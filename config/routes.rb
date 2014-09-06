@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   get 'logout', :to => 'users#logout'
   get 'users/edit_form', :to => 'users#edit_form'
   get 'users/control_panel', :to => 'users#control_panel'
+  get 'users/email_confirmation_again', :to => 'users#email_confirmation_again'
+  get 'users/resend_email', :to => 'users#resend_email'
+  get 'users/welcome', :to => 'users#welcome'
 
   resources :users do
     member do

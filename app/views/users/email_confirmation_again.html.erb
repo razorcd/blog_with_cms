@@ -1,0 +1,6 @@
+<h1 class="title">Email Confirmation</h1>
+
+<div class="error-msg"><%= flash[:error] %></div>
+
+  <p class="message">You need to confirm your email before you can login.</p>
+  <p class="message"> <%= link_to('RESEND CONFIRMATION EMAIL', {:action => 'resend_email'}) %></p>

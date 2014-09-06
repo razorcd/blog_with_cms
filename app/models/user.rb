@@ -17,8 +17,11 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username, :message => "has already been taken"
   validates_format_of :username, :with => /\A[_a-zA-Z]([\.\-_a-zA-Z0-9]+)[_\-a-zA-Z0-9]\z/, :message => "must contain valid characters"
   validates_length_of :username, :within =>3..16 ,:message => "must be between 3 and 16 characters"
-
+  
+  
   validates_presence_of :email, :message => "field can't be blank"
+  validates_presence_of :email_confirmation, :message => "must have the same email", :on => :create
+  validates_confirmation_of :email, :message => "should match confirmation"
   validates_uniqueness_of :email, :message => "has already been used"
   validates_length_of :email, :maximum => 28, :message => "must be maximum 28 characters long"
   validates_format_of :email, :with => /\A[_a-zA-Z0-9]([\-+_%.a-zA-Z0-9]+)?@([_+\-%a-zA-Z0-9]+)(\.[a-zA-Z0-9]{0,6}){1,2}([a-zA-Z0-9]\z)/, :message => "must be in a valid format"

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :confirm_login, except: [:index, :login, :login_form, :edit_form, :create, :email_confirmation]
+  before_action :confirm_login, except: [:index, :welcome, :login, :login_form, :logout, :edit_form, :create, :email_confirmation, :email_confirmation_again, :resend_email]
 
   #-> register_form view
   def index
@@ -32,6 +32,7 @@ class UsersController < ApplicationController
     if authorised_user
       session[:user_id] = authorised_user.id
       session[:username] = authorised_user.username
+      session[:email_confirmed] = authorised_user[:email_confirmed]
       #render inline: "IN"
       redirect_to(:action=>"control_panel")
     else
@@ -64,7 +65,7 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:notice] = ""
-      render inline: "User Created"
+      redirect_to(:action => "welcome")
       UserMailer.welcome_email(@user).deliver
     else
       flash[:notice] = @user.errors.full_messages[0]
@@ -73,9 +74,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def welcome
+  end
+
   #GET email confirmation from emailed link
   def email_confirmation
-    flash[:error] = ":"
     @user = User.where(:username => params[:username]).first
 
     #checking if email is already confirmed:
@@ -92,13 +95,28 @@ class UsersController < ApplicationController
         @user.email_confirmed = true         
       end
     end
-    
   end
+
+  def email_confirmation_again
+  end
+
+  def resend_email
+    @user = User.find_by_id(session[:user_id])
+
+    if @user 
+      UserMailer.welcome_email(@user).deliver
+      flash[:notice] = "Confirmation email sent. Please check your email and follow instructions."
+    else
+      flash[:notice] = "User not found"
+    end
+  end
+
 
   #GET logout
   def logout
     session[:user_id] = nil
     session[:username] = nil
+    session[:email_confirmed] = nil
     redirect_to('/login')
   end
 
@@ -106,11 +124,15 @@ class UsersController < ApplicationController
   private
   
   def register_permits
-    params.require(:user).permit(:username, :password, :password_confirmation, :email, :first_name, :mid_name, :last_name, :terms, :birth, :captcha, :captcha_key)
+    params.require(:user).permit(:username, :password, :password_confirmation, :email, :email_confirmation, :first_name, :mid_name, :last_name, :terms, :birth, :captcha, :captcha_key)
   end
 
   def confirm_login
     if session[:user_id]
+      if session[:email_confirmed] == false 
+        redirect_to(:action => "email_confirmation_again")
+        return false
+      end
       return true
     else
       redirect_to(:action => "login_form")      
