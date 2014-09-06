@@ -2,11 +2,21 @@ Rails.application.routes.draw do
 
   root 'public#index'
 
+
+
+  # resources :users do
+  #   member do
+  #     get :email_confirmation
+  #   end
+  # end
+
+
   get 'login', :to => 'users#login_form'
   post 'login', :to => 'users#login'
   #get 'register', :to => 'users#register_form'
   get 'logout', :to => 'users#logout'
-  get 'users/edit_form', :to => 'users#edit_form'
+  get 'users/update_form', :to => 'users#update_form'
+  patch 'users/update', :to => 'users#update'
   get 'users/control_panel', :to => 'users#control_panel'
   get 'users/email_confirmation_again', :to => 'users#email_confirmation_again'
   get 'users/resend_email', :to => 'users#resend_email'
@@ -15,12 +25,6 @@ Rails.application.routes.draw do
   post 'users/reset_password', :to => 'users#reset_password'
   get 'users/reset_password_confirmation', :to => 'users#reset_password_confirmation'
 
-  resources :users do
-    member do
-      get :email_confirmation
-
-    end
-  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

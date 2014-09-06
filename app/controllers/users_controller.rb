@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :confirm_login, except: [:index, :welcome, :login, :login_form, :logout, :edit_form, :create, :email_confirmation, :email_confirmation_again, :resend_email, :forgot_password_form, :reset_password_confirmation, :reset_password]
+  before_action :confirm_login, except: [:index, :welcome, :login, :login_form, :logout, :create, :email_confirmation, :email_confirmation_again, :resend_email, :forgot_password_form, :reset_password_confirmation, :reset_password]
 
   #-> register_form view
   def index
@@ -45,12 +45,31 @@ class UsersController < ApplicationController
   def control_panel
   end
 
-  #GET login check
-  def edit_form
-    if confirm_login
-      render inline: "You are logged in"
+
+  def update
+  end
+
+  #GET update user fields form
+  def update_form
+    @user = User.find_by_id(session[:user_id])
+  end
+
+  #POST edit user fields
+  def update
+    @user = User.find_by_id(session[:user_id])
+    _birth = Date.civil(params[:birth][:year].to_i, params[:birth][:month].to_i, params[:birth][:day].to_i)
+    if @user.update_attributes(:email => params[:email], :first_name => params[:first_name], :mid_name => params[:mid_name], :last_name => params[:last_name], :birth => _birth)
+      flash[:notice] = "Details updated successfully. "
+      redirect_to(:action => "update_form")
+    else
+      flash[:error] = "Failed to update user:" + @user.errors.full_messages[0]
+      redirect_to(:action => "update_form")
     end
   end
+
+
+
+
 
   #POST create new user
   def create
@@ -160,6 +179,7 @@ class UsersController < ApplicationController
   def register_permits
     params.require(:user).permit(:username, :password, :password_confirmation, :email, :email_confirmation, :first_name, :mid_name, :last_name, :terms, :birth, :captcha, :captcha_key)
   end
+
 
   def confirm_login
     if session[:user_id]

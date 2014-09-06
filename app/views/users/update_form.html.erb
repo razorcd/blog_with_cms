@@ -1,0 +1,39 @@
+<h1 class="title">EDIT USER DETAILS</h1>
+<div class="register">
+    <div class="control-group">
+      <div><%= label_tag(:username, "Username:") %></div>
+      <div><%= text_field_tag(:username, @user.username, :disabled => true) %></div>
+    </div>
+    <div class="register-btn"> <button> CHANGE PASSWORD </button> </div>
+</div>
+
+<div>
+  <%= form_tag({:action => 'update'}, {method: :patch, :class => "register"}) do %>
+    <div class="success-msg"><%= flash[:notice] %></div>
+    <div class="error-msg"><%= flash[:error] %></div>
+    <div class="control-group">
+      <div><%= label_tag(:email, "Email:") %></div>
+      <div><%= text_field_tag(:email, @user[:email]) %></div>
+    </div>
+    <div class="control-group">
+      <div><%= label_tag(:first_name, "First name: ") %></div>
+      <div><%= text_field_tag(:first_name, @user[:first_name]) %></div>
+    </div>
+    <div class="control-group">
+      <div><%= label_tag(:mid_name, "Middle name:") %></div>
+      <div><%= text_field_tag(:mid_name, @user[:mid_name]) %></div>
+    </div>
+    <div class="control-group">
+      <div><%= label_tag(:last_name, "Last name:") %></div>
+      <div><%= text_field_tag(:last_name, @user[:last_name]) %></div>
+    </div>
+    <div class="control-group">
+      <div><%= label_tag(:birth, "Birth date:") %></div>
+      <div><%= select_date @user[:birth], prefix: :birth %></div>
+    </div>
+
+    <div class="register-btn">
+      <button type="submit">> UPDATE </button>
+    </div>
+  <% end %>
+</div>

@@ -1,3 +1,10 @@
 <h1 class="title">CONTROL PANEL</h1>
 
 <p>You are logged in as <%= session[:username] %></p>
+<p>
+  To update your user details please 
+  <%= link_to("CLICK HERE", {:action => "update_form"}) %>
+</p>
+
+
+

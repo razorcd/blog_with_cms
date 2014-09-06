@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   
   attr_accessor :terms, :email_confirmed #, :password, :password_confirmation
 
-  validates :password, length: { within: 6..16  } 
+  validates :password, length: { within: 6..16  } , :on => 'create'
 
   validates_presence_of :terms, :message => "must be present", :on => 'create'
   validates_numericality_of :terms, :equal_to => 1, :message => "must be accepted", :on => 'create'
