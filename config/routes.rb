@@ -15,9 +15,17 @@ Rails.application.routes.draw do
   post 'login', :to => 'users#login'
   #get 'register', :to => 'users#register_form'
   get 'logout', :to => 'users#logout'
+  
+  get 'users', :to => 'users#index'
+
+  post 'users/create', :to => 'users#create'
+
   get 'users/update_form', :to => 'users#update_form'
   patch 'users/update', :to => 'users#update'
+  patch 'users/update_password', :to => 'users#update_password'
+
   get 'users/control_panel', :to => 'users#control_panel'
+  get 'users/email_confirmation', :to => 'users#email_confirmation'
   get 'users/email_confirmation_again', :to => 'users#email_confirmation_again'
   get 'users/resend_email', :to => 'users#resend_email'
   get 'users/welcome', :to => 'users#welcome'

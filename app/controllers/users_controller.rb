@@ -54,11 +54,21 @@ class UsersController < ApplicationController
     @user = User.find_by_id(session[:user_id])
   end
 
+
   #POST edit user fields
   def update
     @user = User.find_by_id(session[:user_id])
+
+    #check password
+    if !@user.authenticate(params[:password])
+      flash[:error] = "Incorrect password"
+      redirect_to(:action => "update_form")
+      return
+    end
+
+    #update details
     _birth = Date.civil(params[:birth][:year].to_i, params[:birth][:month].to_i, params[:birth][:day].to_i)
-    if @user.update_attributes(:email => params[:email], :first_name => params[:first_name], :mid_name => params[:mid_name], :last_name => params[:last_name], :birth => _birth)
+    if @user.update_attributes(:password => params[:password], :email => params[:email], :first_name => params[:first_name], :mid_name => params[:mid_name], :last_name => params[:last_name], :birth => _birth)
       flash[:notice] = "Details updated successfully. "
       redirect_to(:action => "update_form")
     else
@@ -68,6 +78,36 @@ class UsersController < ApplicationController
   end
 
 
+  def update_password
+    @user = User.find_by_id(session[:user_id])
+
+    if !(params[:password_old].present? && params[:password].present? && params[:password_confirmation].present?)
+      flash[:error_password] = "Please fill all fields."
+      redirect_to(:action => "update_form")
+      return
+    end
+
+    #check old password
+    if !@user.authenticate(params[:password_old])
+      flash[:error_password] = "Old password incorrect."
+      redirect_to(:action => "update_form")
+      return
+    end
+
+    @user.password = params[:password]
+    @user.password_confirmation = params[:password_confirmation]
+
+    if @user.save
+      flash[:notice_password] = "Password updated successfully."
+      redirect_to(:action => "update_form")
+    else
+      flash[:error_password] = @user.errors.full_messages[0]
+      redirect_to(:action => "update_form")
+      return
+    end
+
+
+  end
 
 
 

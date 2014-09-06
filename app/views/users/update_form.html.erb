@@ -4,13 +4,43 @@
       <div><%= label_tag(:username, "Username:") %></div>
       <div><%= text_field_tag(:username, @user.username, :disabled => true) %></div>
     </div>
-    <div class="register-btn"> <button> CHANGE PASSWORD </button> </div>
+    
 </div>
 
+<h3>Update User Password:</h3>
+<div>
+  <%= form_tag({:action => 'update_password'}, {method: :patch, :class => "register"}) do %>
+    <div class="success-msg"><%= flash[:notice_password] %></div>
+    <div class="error-msg"><%= flash[:error_password] %></div>
+    <div class="control-group">
+      <div><%= label_tag(:password_old, "Old password:") %></div>
+      <div><%= password_field_tag(:password_old) %></div>
+    </div>
+    <div class="control-group">
+      <div><%= label_tag(:password, "New password:") %></div>
+      <div><%= password_field_tag(:password) %></div>
+    </div>
+    <div class="control-group">
+      <div><%= label_tag(:password_confirmation, "Confirm New password:") %></div>
+      <div><%= password_field_tag(:password_confirmation) %></div>
+    </div>
+    <div class="register-btn">
+      <button type="submit">> CHANGE PASSWORD</button>
+    </div>
+  <% end %>
+</div>
+
+
+
+<h3>Update User Details:</h3>
 <div>
   <%= form_tag({:action => 'update'}, {method: :patch, :class => "register"}) do %>
     <div class="success-msg"><%= flash[:notice] %></div>
     <div class="error-msg"><%= flash[:error] %></div>
+    <div class="control-group">
+      <div><%= label_tag(:password, "Password: (required)") %></div>
+      <div><%= password_field_tag(:password) %></div>
+    </div>
     <div class="control-group">
       <div><%= label_tag(:email, "Email:") %></div>
       <div><%= text_field_tag(:email, @user[:email]) %></div>
@@ -33,7 +63,7 @@
     </div>
 
     <div class="register-btn">
-      <button type="submit">> UPDATE </button>
+      <button type="submit">> UPDATE USER DETAILS</button>
     </div>
   <% end %>
 </div>

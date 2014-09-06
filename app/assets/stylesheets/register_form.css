@@ -24,6 +24,13 @@
   .register .error-msg {
     color:red;
     margin-bottom: 15px;
+    font-weight: bold;
+  }
+
+  .register .success-msg {
+    color:rgb(21, 203, 21);
+    margin-bottom: 15px;
+    font-weight: bold;
   }
 
   .register .agreed {
