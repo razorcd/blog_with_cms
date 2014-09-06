@@ -1,0 +1,12 @@
+Welcome to blogapp.com, <%= @user.first_name %>
+======================================================
+
+You have successfully registred to blogapp.com,
+your username is <%= @user.username %>.
+
+An email confirmation is needed.
+Please access the following link to confirm the email.
+
+<%= link_to("CLICK HERE", {:only_path => false, :controller => "users", :action => "email_confirmation", :id => @user.email_confirmation_id, :username => @user.username}) %>
+
+Thanks for joining and have a great day!

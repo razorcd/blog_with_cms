@@ -1,0 +1,21 @@
+<%= form_tag({:action => 'login'}, {:class => "register"}) do %>
+  <div class="error-msg"><%= flash[:notice] %></div>
+  <div class="control-group">
+    <div><%= label(:username, "Username:") %></div>
+    <div><%= text_field_tag(:username, params[:username]) %></div>
+  </div>
+  <div class="control-group">
+    <div><%= label(:password, "Password:") %></div>
+    <div><%= password_field_tag(:password) %></div>
+  </div>
+  
+  <!-- <div class="capcha"> -->
+    <%#= show_simple_captcha(:label => "", :placeholder => "Enter text") %>
+  <!-- </div> -->
+
+  
+  <div class="register-btn">
+    <button type="submit" >> LOGIN</button>
+  </div>
+<% end %>
+

@@ -1,0 +1,9 @@
+<h1 class="title">Email Confirmation</h1>
+
+<div class="error-msg"><%= flash[:error] %></div>
+
+<% if (@user && @user.email_confirmed == true) %>
+  <p class="message">Email was confirmed, you can login.</p>
+<% else %>
+  <p class="message"> Email confirmation invalid.</p>
+<% end %>

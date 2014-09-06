@@ -3,11 +3,16 @@ Rails.application.routes.draw do
   root 'public#index'
 
   get 'login', :to => 'users#login_form'
+  post 'login', :to => 'users#login'
   #get 'register', :to => 'users#register_form'
   get 'logout', :to => 'users#logout'
-  
+  get 'users/edit_form', :to => 'users#edit_form'
 
   resources :users do
+    member do
+      get :email_confirmation
+
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html> 
+  <head>
+    <meta content='text/html'; charset='UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Weolcome to blogapp.com, <%= @user.first_name %></h1>
+    <p>
+      You have successfully registred to blogapp.com,
+      your username is: <%= @user.username %>.
+    </p>
+    <p>
+      An email confirmation is needed.
+      Please access the following link to confirm the email.
+      <br />
+    </p>
+
+    <p>
+      <%= link_to("CLICK HERE", {:only_path => false, :controller => "users", :action => "email_confirmation", :id => @user.email_confirmation_id, :username => @user.username}) %>
+      <br />
+    </p>
+
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>
