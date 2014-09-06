@@ -60,6 +60,8 @@
 
 .login-btn {
   position:absolute;
+  width: 130px;
+  text-align: center;
   top:8px;
   right:-10px;
   background-color: #CE0005;

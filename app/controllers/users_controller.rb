@@ -1,13 +1,26 @@
 class UsersController < ApplicationController
+
+  before_action :confirm_login, except: [:index, :login, :login_form, :edit_form, :create, :email_confirmation]
+
+  #-> register_form view
   def index
+    if session[:user_id].present? 
+      redirect_to(:action => "control_panel") 
+      return
+    end
     @user = User.new
     flash[:notice] = ""
     render('register_form')
   end
 
   def login_form
+    if session[:user_id].present? 
+      redirect_to(:action => "control_panel") 
+      return
+    end
   end
 
+  #POST login attempt
   def login
     if params[:username].present? && params[:password].present?
       found_user = User.where(:username => params[:username]).first
@@ -19,20 +32,26 @@ class UsersController < ApplicationController
     if authorised_user
       session[:user_id] = authorised_user.id
       session[:username] = authorised_user.username
-      render inline: "IN"
-      #redirect_to(:action=>"index")
+      #render inline: "IN"
+      redirect_to(:action=>"control_panel")
     else
-      flash[:notice] = "Invalid username/password"
+      flash[:error] = "Invalid username/password"
       render("login_form")
     end
   end
 
+  #GET users/control_panel
+  def control_panel
+  end
+
+  #GET login check
   def edit_form
     if confirm_login
       render inline: "You are logged in"
     end
   end
 
+  #POST create new user
   def create
     @user = User.new(register_permits)
 
@@ -54,6 +73,7 @@ class UsersController < ApplicationController
     end
   end
 
+  #GET email confirmation from emailed link
   def email_confirmation
     flash[:error] = ":"
     @user = User.where(:username => params[:username]).first
@@ -74,6 +94,14 @@ class UsersController < ApplicationController
     end
     
   end
+
+  #GET logout
+  def logout
+    session[:user_id] = nil
+    session[:username] = nil
+    redirect_to('/login')
+  end
+
 
   private
   

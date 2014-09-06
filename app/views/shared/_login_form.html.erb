@@ -1,5 +1,5 @@
 <%= form_tag({:action => 'login'}, {:class => "register"}) do %>
-  <div class="error-msg"><%= flash[:notice] %></div>
+  <div class="error-msg"><%= flash[:error] %></div>
   <div class="control-group">
     <div><%= label(:username, "Username:") %></div>
     <div><%= text_field_tag(:username, params[:username]) %></div>

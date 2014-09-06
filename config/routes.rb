@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   #get 'register', :to => 'users#register_form'
   get 'logout', :to => 'users#logout'
   get 'users/edit_form', :to => 'users#edit_form'
+  get 'users/control_panel', :to => 'users#control_panel'
 
   resources :users do
     member do
