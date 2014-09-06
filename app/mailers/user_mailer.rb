@@ -8,5 +8,8 @@ class UserMailer < ActionMailer::Base
     mail(to: @user.email, subject: "Welcome to blogapp.com Site")
   end
 
-
+  def reset_password_email(user)
+    @user = user
+    mail(to: @user.email, subject: "blogapp.com, password reset")
+  end
 end

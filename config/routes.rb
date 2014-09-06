@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   get 'users/email_confirmation_again', :to => 'users#email_confirmation_again'
   get 'users/resend_email', :to => 'users#resend_email'
   get 'users/welcome', :to => 'users#welcome'
+  get 'users/forgot_password_form', :to => 'users#forgot_password_form'
+  post 'users/reset_password', :to => 'users#reset_password'
+  get 'users/reset_password_confirmation', :to => 'users#reset_password_confirmation'
 
   resources :users do
     member do

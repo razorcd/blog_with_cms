@@ -3,3 +3,7 @@
   They will automatically be included in application.css.
 */
 
+.message {
+  text-align: left;
+  margin: 0 40px;
+}

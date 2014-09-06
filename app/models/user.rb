@@ -10,8 +10,8 @@ class User < ActiveRecord::Base
 
   validates :password, length: { within: 6..16  } 
 
-  validates_presence_of :terms, :message => "must be present"
-  validates_numericality_of :terms, :equal_to => 1, :message => "must be accepted"
+  validates_presence_of :terms, :message => "must be present", :on => 'create'
+  validates_numericality_of :terms, :equal_to => 1, :message => "must be accepted", :on => 'create'
 
   validates_presence_of :username, :message => "field can't be blank"
   validates_uniqueness_of :username, :message => "has already been taken"

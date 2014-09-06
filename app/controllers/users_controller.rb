@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :confirm_login, except: [:index, :welcome, :login, :login_form, :logout, :edit_form, :create, :email_confirmation, :email_confirmation_again, :resend_email]
+  before_action :confirm_login, except: [:index, :welcome, :login, :login_form, :logout, :edit_form, :create, :email_confirmation, :email_confirmation_again, :resend_email, :forgot_password_form, :reset_password_confirmation, :reset_password]
 
   #-> register_form view
   def index
@@ -120,6 +120,40 @@ class UsersController < ApplicationController
     redirect_to('/login')
   end
 
+  def forgot_password_form
+  end
+
+  def reset_password_confirmation
+  end
+
+  def reset_password
+    if params[:username].present?
+      @user = User.where(:username => params[:username]).first
+    end
+    if !@user && params[:email].present?
+      @user = User.where(:email => params[:email]).first
+    end
+
+    if @user
+      #found username or email
+      @user.password = generate_password
+      if @user.save
+        #send email
+        UserMailer.reset_password_email(@user).deliver
+        render ("reset_password_confirmation")
+        return
+      else
+        flash[:error] = "Can't update user password in db"
+        render ("forgot_password_form")
+        return
+      end
+    else
+      flash[:error] = "Username or email address not found"
+      render ("forgot_password_form")
+      return
+    end
+
+  end
 
   private
   
@@ -138,6 +172,13 @@ class UsersController < ApplicationController
       redirect_to(:action => "login_form")      
       return false
     end
+  end
+
+  def generate_password
+    r=""
+    chars = [*'0'..'9'] | [*'a'..'z'] | [*'A'..'Z'] | ['-','_']
+    8.times {r +=  chars[rand(chars.size-1)] }
+    r
   end
 
 end

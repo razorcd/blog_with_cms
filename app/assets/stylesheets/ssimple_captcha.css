@@ -1,4 +1,9 @@
-  .simple_captcha{border: 1px solid #ccc; padding: 5px !important;margin-bottom:15px;}
+  .simple_captcha{
+    border: 1px solid #ccc; 
+    padding: 5px !important;
+    margin-bottom:15px;
+    margin-top:15px;
+  }
   .simple_captcha,
   .simple_captcha div{display: table;}
   .simple_captcha .simple_captcha_field,

@@ -4,7 +4,8 @@
 }
 
   .register .control-group  {
-    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 3px;
   }
 
 
@@ -48,4 +49,9 @@
 
     .register .register-btn button:hover {
       color:orange;
+    }
+
+    .register .forgot-password {
+      font-size: 8pt;
+      margin-left: 77px;
     }
